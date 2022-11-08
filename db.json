@@ -3,5 +3,8 @@
     {"id":  1, "title":  "JS POST", "body":  "Adipisci deserunt, dolorum exercitationem facilis molestiae"},
     {"id":  2, "title":  "TS POST", "body":  "dolorum exercitationem facilis molestiae"},
     {"id":  3, "title":  "JSON POST", "body":  "Adipisci deserunt"}
-  ]
+  ],
+  "about": {
+    "title": "Page about us"
+  }
 }

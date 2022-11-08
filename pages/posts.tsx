@@ -1,10 +1,17 @@
 import Head from "next/head";
 import {MainLayout} from "../components/MainLatout";
 import {useEffect, useState} from "react";
+import Link from "next/link";
+import {MyPost} from "../interfaces/post";
+import {NextPageContext} from "next";
 
-export default function Post() {
+interface IPosts {
+  posts: MyPost[]
+}
 
-  const [posts, setPosts] = useState<any[]>([])
+export default function Posts({posts: serverPosts}: IPosts) {
+
+  const [posts, setPosts] = useState<MyPost[]>(serverPosts)
 
   useEffect(() => {
     async function load() {
@@ -12,8 +19,17 @@ export default function Post() {
       const data = await response.json()
       setPosts(data)
     }
+
     load()
   }, [])
+
+  if (!posts) {
+    return (
+      <MainLayout>
+        <p>Loading...</p>
+      </MainLayout>
+    )
+  }
 
   return (
     <MainLayout title="Posts page">
@@ -23,9 +39,30 @@ export default function Post() {
         <meta name='description' content="tutorial"/>
       </Head>
       <h1>Posts page</h1>
-      <pre>
+      {/*     <pre>
         {JSON.stringify(posts, null, 2)}
-      </pre>
+      </pre>*/}
+      <ul>
+        {posts.map((post: MyPost) => (
+          <li key={post.id}>
+            {/*<Link href={`/post/${post.id}`}>{post.title}</Link>*/}
+            <Link href={`/post/[id]`} as={`/post/${post.id}`}>{post.title}</Link>
+          </li>
+        ))}
+      </ul>
     </MainLayout>
   )
+}
+
+Posts.getInitialProps = async ({req}: NextPageContext) => {
+  if (!req) {
+    return {posts: null}
+  }
+
+  const response = await fetch('http://localhost:4200/posts')
+  const posts: MyPost[] = await response.json()
+
+  return {
+    posts,
+  }
 }

@@ -55,10 +55,6 @@ export default function Post({post: serverPost}: IPost) {
 }
 
 export async function getServerSideProps({req, query}: PostNextPageContext) {
-  // if (!req) {
-  //   return {post: null}
-  // }
-
   const response = await fetch(`http://localhost:4200/posts/${query.id}`)
   const post: MyPost = await response.json()
 
@@ -66,17 +62,3 @@ export async function getServerSideProps({req, query}: PostNextPageContext) {
     props: post,
   }
 }
-
-//Альтернатива
-// Post.getInitialProps = async (ctx: PostNextPageContext) => {
-//   if (!ctx.req) {
-//     return {post: null}
-//   }
-//
-//   const response = await fetch(`http://localhost:4200/posts/${ctx.query.id}`)
-//   const post: MyPost = await response.json()
-//
-//   return {
-//     post,
-//   }
-// }

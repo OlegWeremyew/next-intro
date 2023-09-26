@@ -9,7 +9,7 @@ export default function Home() {
         About page
       </Link>
       <Link href="about/author">
-        Author page
+        Author page author
       </Link>
       <Link href="posts">
         Posts page

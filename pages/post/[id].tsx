@@ -5,7 +5,6 @@ import {useEffect, useState} from "react";
 import {NextPageContext} from "next";
 import {MyPost} from "../../interfaces/post";
 
-//Расширяем наш тип для коректного отображени query
 interface PostNextPageContext extends NextPageContext {
   query: {
     id: string

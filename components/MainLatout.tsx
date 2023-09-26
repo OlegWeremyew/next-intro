@@ -1,7 +1,8 @@
 import Link from "next/link";
 import Head from "next/head";
+import {ReactNode} from "react";
 
-export function MainLayout({children, title = "Next app"}: any) {
+export function MainLayout({children, title = "Next app"}: {children: ReactNode, title?: string}) {
   return (
     <>
       <Head>
